@@ -1,0 +1,10 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TruthOrDrinkApp.MainPage">
+    <StackLayout>
+        <Label Text="Truth Or Drink" />
+        <Button Text="Nieuw spel" Clicked="NewGameButtonClicked" />
+        <Button Text="Vraag aanmaken" Clicked="NewQuestionButtonClicked" />
+        <Button Text="Logout" Clicked="OnLogoutButtonClicked" />
+    </StackLayout>
+</ContentPage>
