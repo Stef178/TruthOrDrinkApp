@@ -1,0 +1,19 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TruthOrDrinkApp.NewGamePage"
+             Title="Nieuw spel">
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+
+        <!-- Titel -->
+        <Label Text="Gewaagdheid kiezen"
+               FontSize="24"
+               HorizontalOptions="Center"
+               VerticalOptions="Start" />
+
+        <!-- Volgende knop -->
+        <Button Text="Volgende"
+                FontSize="18"
+                Clicked="OnNextButtonClicked"
+                HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
