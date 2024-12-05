@@ -3,10 +3,35 @@
     x:Class="TruthOrDrinkApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:TruthOrDrinkApp">
+    xmlns:local="clr-namespace:TruthOrDrinkApp"
+    Shell.FlyoutBehavior="Flyout"
+    Title="TruthOrDrinkApp">
 
-    <ShellContent
-        Title="Main"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <Shell.FlyoutHeader>
+        <StackLayout  Padding="20">
+            <Label Text="Welkom" FontSize="24" HorizontalOptions="Center" />
+        </StackLayout>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Home" Icon="home.png">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="HomePage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Settings" Icon="setting.png">
+        <ShellContent
+            Title="Settings"
+            ContentTemplate="{DataTemplate local:Settings}"
+            Route="Settings" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Help" Icon="question.png">
+        <ShellContent
+            Title="Help"
+            ContentTemplate="{DataTemplate local:Help}"
+            Route="Help" />
+    </FlyoutItem>
+
 </Shell>

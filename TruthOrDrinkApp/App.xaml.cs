@@ -7,7 +7,8 @@ namespace TruthOrDrinkApp
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
+
+            MainPage = new AppShell();
         }
     }
 }
