@@ -6,35 +6,95 @@ using System.Threading.Tasks;
 using SQLite;
 using TruthOrDrinkApp.Models;
 
-namespace TruthOrDrinkApp.Data
+namespace TruthOrDrinkApp.Models
 {
+
     public class UserRepository
     {
-        SQLiteConnection connection;
-        public string? statusMessage { get; set; }
+        private readonly SQLiteConnection connection;
+        public string? StatusMessage { get; set; }
 
-        public UserRepository()
+        public UserRepository(string dbPath)
         {
-            connection = new SQLiteConnection(
-                Constants.DatabasePath,
-                Constants.flags);
+            // Initialize SQLite connection and create User table
+            connection = new SQLiteConnection(dbPath);
             connection.CreateTable<User>();
         }
 
-        public void Add(User newUser)
+        public void AddOrUpdate(User user)
         {
-            int result = 0;
             try
             {
-                result = connection.Insert(newUser);
-                statusMessage = $"{result} row(s) added";
+                if (user.Id == 0)
+                {
+                    // Add new user
+                    connection.Insert(user);
+                    StatusMessage = "User successfully added.";
+                }
+                else
+                {
+                    // Update existing user
+                    connection.Update(user);
+                    StatusMessage = "User successfully updated.";
+                }
             }
             catch (Exception ex)
             {
-                statusMessage = $"Error: {ex.Message}";
+                StatusMessage = $"Error: {ex.Message}";
+            }
+        }
+
+        public List<User> GetAll()
+        {
+            try
+            {
+                // Return all users
+                return connection.Table<User>().ToList();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error: {ex.Message}";
+                return new List<User>();
+            }
+        }
+
+        public User? Get(int id)
+        {
+            try
+            {
+                // Retrieve user by ID
+                return connection.Table<User>().FirstOrDefault(u => u.Id == id);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error: {ex.Message}";
+                return null;
+            }
+        }
+
+        public void Delete(int userId)
+        {
+            try
+            {
+                // Retrieve the user and delete them
+                User? user = Get(userId);
+                if (user != null)
+                {
+                    connection.Delete(user);
+                    StatusMessage = "User successfully deleted.";
+                }
+                else
+                {
+                    StatusMessage = "User not found.";
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error: {ex.Message}";
             }
         }
     }
 }
+
 
 
