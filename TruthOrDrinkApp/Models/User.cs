@@ -7,8 +7,8 @@ using SQLite;
 
 namespace TruthOrDrinkApp.Models
 {
-    [Table("Students")]
-    public class Student
+    [Table("User")]
+    public class User
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
