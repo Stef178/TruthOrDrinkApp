@@ -23,7 +23,8 @@ namespace TruthOrDrinkApp
 
             if (user != null)
             {
-                await Navigation.PushAsync(new MainPage(_database));
+                // Geef de ingelogde gebruiker door aan MainPage
+                await Navigation.PushAsync(new MainPage(_database, user));
             }
             else
             {

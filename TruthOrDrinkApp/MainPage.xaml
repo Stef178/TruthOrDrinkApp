@@ -3,6 +3,12 @@
              x:Class="TruthOrDrinkApp.MainPage"
              Title="Truth Or Drink">
     <StackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+        <!-- Welkomsttekst -->
+        <Label x:Name="WelcomeLabel"
+               FontSize="24"
+               HorizontalOptions="Center"
+               TextColor="DarkBlue" />
+
         <Label Text="Truth Or Drink"
                FontSize="24"
                HorizontalOptions="Center" />

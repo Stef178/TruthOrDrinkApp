@@ -9,11 +9,5 @@
                FontSize="24"
                HorizontalOptions="Center"
                VerticalOptions="Start" />
-
-        <!-- Volgende knop -->
-        <Button Text="Spel stoppen"
-                FontSize="18"
-                Clicked="BackToHomeClicked"
-                HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>
