@@ -11,7 +11,10 @@ namespace TruthOrDrinkApp
         {
             InitializeComponent();
             InitializeDatabase();
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new MainPage(Database));
+            MainPage = new NavigationPage(new LoginPage(App.Database));
+
+
         }
 
         private void InitializeDatabase()

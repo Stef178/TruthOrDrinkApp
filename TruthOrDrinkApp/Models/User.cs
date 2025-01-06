@@ -11,6 +11,12 @@ namespace TruthOrDrinkApp.Models
         [Column("name"), Indexed, NotNull]
         public string? Name { get; set; }
 
+        [Unique, NotNull]
+        public string? Email { get; set; } // Gebruikers inloggen met e-mail
+
+        [NotNull]
+        public string Password { get; set; } // Wachtwoord als plain text (simpel)
+
         [Unique]
         public string? Phone { get; set; }
 

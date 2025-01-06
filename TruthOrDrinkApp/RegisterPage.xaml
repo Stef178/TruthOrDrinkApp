@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TruthOrDrinkApp.RegisterPage">
+    <StackLayout Padding="20">
+        <Entry x:Name="NameEntry" Placeholder="Name" />
+        <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" />
+        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" />
+        <Entry x:Name="PhoneEntry" Placeholder="Phone (optional)" Keyboard="Telephone" />
+        <Entry x:Name="AddressEntry" Placeholder="Address (optional)" />
+        <Entry x:Name="AgeEntry" Placeholder="Age (optional)" Keyboard="Numeric" />
+        <Button Text="Register" Clicked="OnRegisterButtonClicked" />
+        <Label x:Name="ErrorLabel" TextColor="Red" IsVisible="False" />
+    </StackLayout>
+</ContentPage>

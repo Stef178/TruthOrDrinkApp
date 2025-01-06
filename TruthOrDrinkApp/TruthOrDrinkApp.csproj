@@ -98,6 +98,9 @@
 	  <MauiXaml Update="NewGamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SelectQuestionType.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -9,6 +9,7 @@ public partial class GameStartedxaml : ContentPage
 
     private async void BackToHomeClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MainPage());
+        await Navigation.PushAsync(new MainPage(App.Database));
     }
+
 }
