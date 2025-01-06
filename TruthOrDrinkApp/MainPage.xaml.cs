@@ -1,4 +1,5 @@
 ﻿using Microsoft.Maui.Controls;
+using SQLiteBrowser;
 
 namespace TruthOrDrinkApp
 {
@@ -7,6 +8,11 @@ namespace TruthOrDrinkApp
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private async void OpenDatabaseBrowser(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DatabaseBrowserPage(Path.Combine(FileSystem.AppDataDirectory, "TruthOrDrink.db")));
         }
 
         // Logout-knop eventhandler

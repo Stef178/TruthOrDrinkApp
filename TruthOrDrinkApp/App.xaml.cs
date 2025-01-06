@@ -1,14 +1,24 @@
 ﻿using Microsoft.Maui.Controls;
+using TruthOrDrinkApp.Data;
+using System.IO;
 
 namespace TruthOrDrinkApp
 {
     public partial class App : Application
     {
+        public static Constants Database { get ; set; }
         public App()
         {
             InitializeComponent();
-
-            MainPage = new AppShell();
+            InitializeDatabase();
+            MainPage = new NavigationPage(new MainPage());
         }
+
+        private void InitializeDatabase()
+        {
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "TruthOrDrink.db");
+            Database = new Constants(dbPath);
+        }
+
     }
 }

@@ -18,5 +18,7 @@
         <Button Text="Vragen aanmaken"
                 FontSize="18"
                 Clicked="OnCreateQuestionsButtonClicked" />
+
+        <Button Text="Open Database Browser" Clicked="OpenDatabaseBrowser" />
     </StackLayout>
 </ContentPage>

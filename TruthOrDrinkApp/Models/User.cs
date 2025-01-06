@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SQLite;
 
 namespace TruthOrDrinkApp.Models
@@ -28,4 +24,3 @@ namespace TruthOrDrinkApp.Models
         public bool? OldEnoughToDrink => Age > 17 ? true : false;
     }
 }
-
