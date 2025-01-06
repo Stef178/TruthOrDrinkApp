@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using SQLite;
 using TruthOrDrinkApp.Models;
 
@@ -7,18 +9,28 @@ namespace TruthOrDrinkApp.Data
 {
     public class Constants
     {
-
         private readonly SQLiteAsyncConnection _database;
 
         public Constants(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
 
-
-
-            _database.CreateTableAsync<User>().Wait();
-
+            try
+            {
+                // Tabellen maken
+                _database.CreateTableAsync<User>().Wait();
+                _database.CreateTableAsync<Session>().Wait();
+                _database.CreateTableAsync<Question>().Wait();
+                _database.CreateTableAsync<SessionQuestion>().Wait();
+                _database.CreateTableAsync<QRInvitation>().Wait();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating tables: {ex.Message}");
+                throw;
+            }
         }
+
         public Task<List<T>> GetAllAsync<T>() where T : new()
         {
             return _database.Table<T>().ToListAsync();
@@ -43,8 +55,5 @@ namespace TruthOrDrinkApp.Data
         {
             return _database.InsertAllAsync(items);
         }
-
-
-
     }
 }

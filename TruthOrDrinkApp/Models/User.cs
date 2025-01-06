@@ -1,5 +1,4 @@
-﻿using System;
-using SQLite;
+﻿using SQLite;
 
 namespace TruthOrDrinkApp.Models
 {
@@ -21,6 +20,6 @@ namespace TruthOrDrinkApp.Models
         public int? Age { get; set; }
 
         [Ignore]
-        public bool? OldEnoughToDrink => Age > 17 ? true : false;
+        public bool? OldEnoughToDrink => Age > 17;
     }
 }
