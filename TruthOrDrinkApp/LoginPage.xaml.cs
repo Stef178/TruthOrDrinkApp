@@ -1,6 +1,5 @@
-using Microsoft.Maui.Controls;
-using TruthOrDrinkApp.Models;
 using TruthOrDrinkApp.Data;
+using TruthOrDrinkApp.Models;
 
 namespace TruthOrDrinkApp
 {

@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Controls;
-
-namespace TruthOrDrinkApp
+﻿namespace TruthOrDrinkApp
 {
     public partial class AppShell : Shell
     {

@@ -2,10 +2,10 @@ namespace TruthOrDrinkApp;
 
 public partial class FillQuestionPool : ContentPage
 {
-	public FillQuestionPool()
-	{
-		InitializeComponent();
-	}
+    public FillQuestionPool()
+    {
+        InitializeComponent();
+    }
 
     private async void OnNextButtonClicked(object sender, EventArgs e)
     {

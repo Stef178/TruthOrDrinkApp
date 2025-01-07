@@ -1,8 +1,6 @@
-﻿using Microsoft.Maui.Controls;
+﻿using SQLiteBrowser;
 using TruthOrDrinkApp.Data;
 using TruthOrDrinkApp.Models;
-using System.IO;
-using SQLiteBrowser;
 
 namespace TruthOrDrinkApp
 {

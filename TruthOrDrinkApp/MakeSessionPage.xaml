@@ -23,6 +23,13 @@
                    FontSize="18"
                    HorizontalOptions="Center" />
 
+            <!-- QR-code afbeelding -->
+            <Image x:Name="qrImage"
+                   HorizontalOptions="Center" 
+                   VerticalOptions="CenterAndExpand" 
+                   WidthRequest="250" 
+                   HeightRequest="250"/>
+
             <!-- Volgende knop -->
             <Button Text="Volgende"
                     FontSize="18"

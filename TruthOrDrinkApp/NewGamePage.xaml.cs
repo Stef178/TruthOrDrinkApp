@@ -1,7 +1,4 @@
-﻿using Microsoft.Maui.Controls;
-using System;
-
-namespace TruthOrDrinkApp
+﻿namespace TruthOrDrinkApp
 {
     public partial class NewGamePage : ContentPage
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using SQLite;
+﻿using SQLite;
 using TruthOrDrinkApp.Models;
 
 namespace TruthOrDrinkApp.Data

@@ -1,6 +1,3 @@
-using Microsoft.Maui.Controls;
-using System.Collections.Generic;
-
 namespace TruthOrDrinkApp
 {
     public partial class ChooseQuestionCategoryPage : ContentPage
