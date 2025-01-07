@@ -1,13 +1,22 @@
-namespace TruthOrDrinkApp;
+using Microsoft.Maui.Controls;
+using System.Collections.Generic;
 
-public partial class SelectQuestionType : ContentPage
+namespace TruthOrDrinkApp
 {
-	public SelectQuestionType()
-	{
-		InitializeComponent();
-	}
-    private async void OnNextButtonClicked(object sender, EventArgs e)
+    public partial class SelectQuestionType : ContentPage
     {
-        await Navigation.PushAsync(new MakeSessionPage());
+        private readonly int _daringLevel;
+        private readonly List<string> _selectedCategories;
+
+        public SelectQuestionType(int daringLevel, List<string> selectedCategories)
+        {
+            InitializeComponent();
+            _daringLevel = daringLevel;
+            _selectedCategories = selectedCategories;
+
+            // Debugging: Toon de ontvangen gegevens
+            Console.WriteLine($"Gewaagdheidsniveau: {_daringLevel}");
+            Console.WriteLine("Categorieën: " + string.Join(", ", _selectedCategories));
+        }
     }
 }
