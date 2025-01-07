@@ -1,12 +1,16 @@
-﻿namespace TruthOrDrinkApp
+﻿using TruthOrDrinkApp.Data;
+
+namespace TruthOrDrinkApp
 {
     public partial class NewGamePage : ContentPage
     {
         private int _daringLevel = 0; // Gekozen gewaagdheidsniveau
+        private readonly Constants _database;
 
-        public NewGamePage()
+        public NewGamePage(Constants database)
         {
             InitializeComponent();
+            _database = database;
         }
 
         // Sterren klikken
@@ -45,7 +49,7 @@
             Console.WriteLine($"Gewaagdheidsniveau gekozen: {_daringLevel}");
 
             // Navigeer naar de ChooseQuestionCategoryPage en geef het gewaagdheidsniveau door
-            await Navigation.PushAsync(new ChooseQuestionCategoryPage(_daringLevel));
+            await Navigation.PushAsync(new ChooseQuestionCategoryPage(_daringLevel, _database));
         }
 
     }

@@ -18,6 +18,7 @@ namespace TruthOrDrinkApp
         private void InitializeDatabase()
         {
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "TruthOrDrink.db");
+            Console.WriteLine(dbPath);
             Database = new Constants(dbPath);
         }
     }

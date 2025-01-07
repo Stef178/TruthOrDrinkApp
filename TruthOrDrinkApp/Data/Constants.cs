@@ -1,5 +1,8 @@
 ﻿using SQLite;
 using TruthOrDrinkApp.Models;
+using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
 
 namespace TruthOrDrinkApp.Data
 {
@@ -18,13 +21,26 @@ namespace TruthOrDrinkApp.Data
                 _database.CreateTableAsync<Session>().Wait();
                 _database.CreateTableAsync<Question>().Wait();
                 _database.CreateTableAsync<SessionQuestion>().Wait();
-                _database.CreateTableAsync<QRInvitation>().Wait();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error creating tables: {ex.Message}");
+                Console.WriteLine($"StackTrace: {ex.StackTrace}");
                 throw;
             }
+        }
+
+        public async Task ResetDatabaseAsync()
+        {
+            await _database.DropTableAsync<Session>();
+            await _database.DropTableAsync<User>();
+            await _database.DropTableAsync<Question>();
+            await _database.DropTableAsync<SessionQuestion>();
+
+            await _database.CreateTableAsync<User>();
+            await _database.CreateTableAsync<Session>();
+            await _database.CreateTableAsync<Question>();
+            await _database.CreateTableAsync<SessionQuestion>();
         }
 
         public Task<List<T>> GetAllAsync<T>() where T : new()

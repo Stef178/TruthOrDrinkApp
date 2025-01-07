@@ -30,7 +30,7 @@ namespace TruthOrDrinkApp
 
         private async void OnNewGameButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewGamePage());
+            await Navigation.PushAsync(new NewGamePage(_database));
         }
 
         private async void OnCreateQuestionsButtonClicked(object sender, EventArgs e)

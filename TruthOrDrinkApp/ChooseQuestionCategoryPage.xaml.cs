@@ -1,13 +1,17 @@
+using TruthOrDrinkApp.Data;
+
 namespace TruthOrDrinkApp
 {
     public partial class ChooseQuestionCategoryPage : ContentPage
     {
         private readonly int _daringLevel;
+        private readonly Constants _database;
 
-        public ChooseQuestionCategoryPage(int daringLevel)
+        public ChooseQuestionCategoryPage(int daringLevel, Constants database)
         {
             InitializeComponent();
             _daringLevel = daringLevel;
+            _database = database;
 
             // Debugging: Laat zien welk gewaagdheidsniveau is ontvangen
             Console.WriteLine($"Ontvangen gewaagdheidsniveau: {_daringLevel}");
@@ -33,7 +37,7 @@ namespace TruthOrDrinkApp
             Console.WriteLine("Geselecteerde categorieën: " + string.Join(", ", selectedCategories));
 
             // Navigeer naar de volgende pagina met geselecteerde gegevens
-            await Navigation.PushAsync(new SelectQuestionType(_daringLevel, selectedCategories));
+            await Navigation.PushAsync(new SelectQuestionType(_daringLevel, selectedCategories, _database));
         }
     }
 }
