@@ -24,6 +24,11 @@
         <Button Text="Vragen aanmaken"
                 FontSize="18"
                 Clicked="OnCreateQuestionsButtonClicked" />
+        <Button Text="Scan QR code"
+                FontSize="18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Clicked="OnOpenCameraButtonClicked" />
 
         <Button Text="Open Database Browser" Clicked="OpenDatabaseBrowser" />
     </StackLayout>

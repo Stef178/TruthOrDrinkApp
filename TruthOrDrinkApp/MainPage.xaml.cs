@@ -42,5 +42,25 @@ namespace TruthOrDrinkApp
         {
             await Navigation.PushAsync(new DatabaseBrowserPage(Path.Combine(FileSystem.AppDataDirectory, "TruthOrDrink.db")));
         }
+
+        private async void OnOpenCameraButtonClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                // Open de camera en wacht tot de gebruiker een foto maakt
+                var photo = await MediaPicker.CapturePhotoAsync();
+
+                if (photo != null)
+                {
+                    // Opslaan of verder verwerken als nodig
+                    await DisplayAlert("Foto gemaakt", "De foto is opgeslagen: " + photo.FullPath, "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Kon de camera niet openen: {ex.Message}", "OK");
+            }
+        }
+
     }
 }
