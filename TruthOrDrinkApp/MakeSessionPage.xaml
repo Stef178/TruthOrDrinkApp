@@ -2,18 +2,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TruthOrDrinkApp.MakeSessionPage"
-             Title="MakeSessionPage">
-    <VerticalStackLayout>
-        <!-- Titel -->
-        <Label Text="Sessie aanmaken"
-               FontSize="24"
-               HorizontalOptions="Center"
-               VerticalOptions="Start" />
+             Title="Sessie aanmaken">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Titel -->
+            <Label Text="Sessie overzicht"
+                   FontSize="24"
+                   HorizontalOptions="Center" />
 
-        <!-- Volgende knop -->
-        <Button Text="Volgende"
-                FontSize="18"
-                Clicked="OnNextButtonClicked"
-                HorizontalOptions="Center" />
-    </VerticalStackLayout>
+            <!-- Gegevens overzicht -->
+            <Label x:Name="DaringLevelLabel"
+                   FontSize="18"
+                   HorizontalOptions="Center" />
+
+            <Label x:Name="CategoriesLabel"
+                   FontSize="18"
+                   HorizontalOptions="Center" />
+
+            <Label x:Name="QuestionTypeLabel"
+                   FontSize="18"
+                   HorizontalOptions="Center" />
+
+            <!-- Volgende knop -->
+            <Button Text="Volgende"
+                    FontSize="18"
+                    Clicked="OnNextButtonClicked"
+                    HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

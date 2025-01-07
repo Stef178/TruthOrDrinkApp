@@ -2,12 +2,38 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TruthOrDrinkApp.SelectQuestionType"
-             Title="SelectQuestionType">
-    <VerticalStackLayout>
-        <!-- Titel -->
-        <Label Text="Vraagtype selecteren"
-               FontSize="24"
-               HorizontalOptions="Center"
-               VerticalOptions="Start" />
-    </VerticalStackLayout>
+             Title="Selecteer vraagtype">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Titel -->
+            <Label Text="Vraagtype selecteren"
+                   FontSize="24"
+                   HorizontalOptions="Center" />
+
+            <!-- Vraagtype keuzes -->
+            <VerticalStackLayout Spacing="10">
+                <!-- Gepersonaliseerd vragen -->
+                <HorizontalStackLayout>
+                    <CheckBox x:Name="PersonalizedCheckBox" />
+                    <Label Text="Gepersonaliseerd vragen."
+                           FontSize="14"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <!-- Voorgestelde vragen -->
+                <HorizontalStackLayout>
+                    <CheckBox x:Name="SuggestedCheckBox" />
+                    <Label Text="Voorgestelde vragen"
+                           FontSize="14"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Volgende knop -->
+            <Button Text="Volgende"
+                    FontSize="18"
+                    Clicked="OnNextButtonClicked"
+                    HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
