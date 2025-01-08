@@ -15,19 +15,8 @@ namespace TruthOrDrinkApp.Models
         [NotNull]
         public int DaringLevel { get; set; }
 
-        // JSON-serialisatie voor de Categories-collectie
-        [NotNull]
-        public string CategoriesJson
-        {
-            get => JsonConvert.SerializeObject(Categories);
-            set => Categories = string.IsNullOrEmpty(value)
-                ? new List<string>()
-                : JsonConvert.DeserializeObject<ICollection<string>>(value);
-        }
-
-        // Wordt niet direct opgeslagen in SQLite
         [Ignore]
-        public ICollection<string> Categories { get; set; } = new List<string>();
+        public ICollection<Category> Categories { get; set; } = new List<Category>();
 
         [NotNull]
         public QuestionTypes QuestionTypes { get; set; }

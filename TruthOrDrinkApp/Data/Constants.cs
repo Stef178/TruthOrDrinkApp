@@ -17,10 +17,18 @@ namespace TruthOrDrinkApp.Data
             try
             {
                 // Tabellen maken
+                
                 _database.CreateTableAsync<User>().Wait();
                 _database.CreateTableAsync<Session>().Wait();
+                _database.CreateTableAsync<Category>().Wait();
                 _database.CreateTableAsync<Question>().Wait();
                 _database.CreateTableAsync<SessionQuestion>().Wait();
+                _database.CreateTableAsync<SuggestedQuestion>().Wait();
+                _database.CreateTableAsync<SessionCategory>().Wait();
+
+
+
+
             }
             catch (Exception ex)
             {
@@ -30,17 +38,16 @@ namespace TruthOrDrinkApp.Data
             }
         }
 
-        public async Task ResetDatabaseAsync()
-        {
-            await _database.DropTableAsync<Session>();
-            await _database.DropTableAsync<User>();
-            await _database.DropTableAsync<Question>();
-            await _database.DropTableAsync<SessionQuestion>();
-
-            await _database.CreateTableAsync<User>();
-            await _database.CreateTableAsync<Session>();
-            await _database.CreateTableAsync<Question>();
-            await _database.CreateTableAsync<SessionQuestion>();
+        private void AddCategories() 
+        { 
+            //_database.DropTableAsync<Category>().Wait();
+            //_database.CreateTableAsync<Category>().Wait();
+            List<Category> categories = new List<Category>() 
+            { new Category( "history", "Geschiedenis"),
+              new Category( "music", "Muziek"),
+              new Category( "science", "Wetenschap"),
+              new Category( "food_and_drink", "Eten en Drinken"), };
+            _database.InsertAllAsync(categories);
         }
 
         public Task<List<T>> GetAllAsync<T>() where T : new()

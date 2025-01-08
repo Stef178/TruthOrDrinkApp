@@ -4,27 +4,63 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using TruthOrDrinkApp.Models;
 using Microsoft.Maui.Controls;
+using Bogus;
+using TruthOrDrinkApp.Data;
+using Bogus.DataSets;
+using System.Collections.ObjectModel;
 
 namespace TruthOrDrinkApp
 {
     public partial class GameStartedxaml : ContentPage
     {
         private static readonly HttpClient client = new HttpClient();
-        private List<SuggestedQuestion> questions;
+        private readonly Constants _database;
+        private List<Question> _questions = new List<Question>();
         private int currentQuestionIndex = 0;
+        private readonly Session _session;
+        private readonly List<Category> _categories;
 
-        public GameStartedxaml()
+        public GameStartedxaml(Session session, Constants database, QuestionTypes questionTypes, List<Category> categories)
         {
             InitializeComponent();
-            LoadQuestions();
+            _session = session;
+            _database = database;
+            _categories = categories;
+
+            if (questionTypes == QuestionTypes.SUGGESTED)
+            {
+                List<SuggestedQuestion> questions = Task.Run(async () => await GetSuggestedQuestions()).Result;
+                questions.ForEach(question => _questions.Add(question));
+
+            }
+            else if (questionTypes == QuestionTypes.PERSONALIZED)
+            {
+                List<Question> questions = Task.Run(async () => await GetQuestions()).Result;
+                questions.ForEach(question => _questions.Add(question));
+            }
+            else
+            {
+                List<Question> questions = Task.Run(async () => await GetQuestions()).Result;
+                questions.ForEach(question => _questions.Add(question));
+                List<SuggestedQuestion> suggestedquestions = Task.Run(async () => await GetSuggestedQuestions()).Result;
+                suggestedquestions.ForEach(question => _questions.Add(question));
+
+            }
+
+            DisplayCurrentQuestion();
         }
 
-        private async void LoadQuestions()
+        private async Task<List<Question>> GetQuestions()
+        {
+            return _database.GetAllAsync<Question>().Result;
+           
+        }
+        private async Task<List<SuggestedQuestion>> GetSuggestedQuestions()
         {
             try
             {
                 // API-aanroep om vragen op te halen
-                var response = await client.GetStringAsync("https://the-trivia-api.com/api/questions?categories=sport_and_leisure&limit=5&region=NL&difficulty=medium");
+                var response = await client.GetStringAsync($"https://the-trivia-api.com/api/questions?categories={string.Join(",",_categories.Select(category => category.Name))}&limit=5&region=NL&difficulty=medium");
 
                 // Controleer de respons om te zorgen dat deze correct is
                 Console.WriteLine(response);
@@ -35,38 +71,32 @@ namespace TruthOrDrinkApp
                     PropertyNameCaseInsensitive = true // Negeer hoofdlettergevoeligheid
                 };
 
-                questions = JsonSerializer.Deserialize<List<SuggestedQuestion>>(response, options);
-
-                // Controleer of er vragen zijn
-                if (questions != null && questions.Count > 0)
-                {
-                    DisplayCurrentQuestion();
-                }
-                else
-                {
-                    Console.WriteLine("Geen vragen gevonden.");
-                }
+                List<SuggestedQuestion> suggestedQuestions = JsonSerializer.Deserialize<List<SuggestedQuestion>>(response, options);
+                suggestedQuestions.ForEach(question => question.SessionID = _session.SessionID);
+                await _database.AddAllAsync<SuggestedQuestion>(suggestedQuestions);
+                return suggestedQuestions;
             }
             catch (Exception ex)
             {
                 // Foutafhandeling
                 Console.WriteLine($"Er is een fout opgetreden: {ex.Message}");
+                return new List<SuggestedQuestion>();
             }
         }
 
         private void DisplayCurrentQuestion()
         {
-            var currentQuestion = questions[currentQuestionIndex];
+            var currentQuestion = _questions[currentQuestionIndex];
 
             // Zet de vraag en het juiste antwoord in de labels
-            QuestionLabel.Text = currentQuestion.Question;
-            AnswerLabel.Text = "Correct Antwoord: " + currentQuestion.CorrectAnswer;
+            QuestionLabel.Text = currentQuestion.QuestionText;
+            AnswerLabel.Text = currentQuestion.GetType() == typeof(SuggestedQuestion) ? "Correct Antwoord: " + ((SuggestedQuestion) currentQuestion).Answer : "";
         }
 
         private void NextQuestionButton_Clicked(object sender, EventArgs e)
         {
             // Ga naar de volgende vraag
-            if (currentQuestionIndex < questions.Count - 1)
+            if (currentQuestionIndex < _questions.Count - 1)
             {
                 currentQuestionIndex++;
                 DisplayCurrentQuestion();

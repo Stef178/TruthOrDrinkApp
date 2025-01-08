@@ -15,8 +15,6 @@
             <Button x:Name="Star1" Text="★" FontSize="24" Clicked="OnStarClicked" CommandParameter="1" />
             <Button x:Name="Star2" Text="★" FontSize="24" Clicked="OnStarClicked" CommandParameter="2" />
             <Button x:Name="Star3" Text="★" FontSize="24" Clicked="OnStarClicked" CommandParameter="3" />
-            <Button x:Name="Star4" Text="★" FontSize="24" Clicked="OnStarClicked" CommandParameter="4" />
-            <Button x:Name="Star5" Text="★" FontSize="24" Clicked="OnStarClicked" CommandParameter="5" />
         </HorizontalStackLayout>
 
         <!-- Geselecteerde waarde -->

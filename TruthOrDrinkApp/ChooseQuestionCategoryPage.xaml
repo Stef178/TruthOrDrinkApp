@@ -9,48 +9,64 @@
                    FontSize="24"
                    HorizontalOptions="Center" />
 
-            <!-- Categorieen -->
-            <VerticalStackLayout Spacing="10">
-                <!-- Happy Hour -->
-                <HorizontalStackLayout>
-                    <CheckBox x:Name="HappyHourCheckBox" />
-                    <Label Text="Happy Hour: Voor als je hulp nodig hebt om aardig te zijn. Leer je kennissen beter kennen."
-                           FontSize="14"
-                           WidthRequest="300"
-                           LineBreakMode="WordWrap"
-                           VerticalOptions="Center" />
-                </HorizontalStackLayout>
 
-                <!-- On the Rocks -->
-                <HorizontalStackLayout>
-                    <CheckBox x:Name="OnTheRocksCheckBox" />
-                    <Label Text="On the Rocks: Maak het persoonlijker met deze vragen voor goede vrienden, die precies de juiste pit hebben."
-                           FontSize="14"
-                           WidthRequest="300"
-                           LineBreakMode="WordWrap"
-                           VerticalOptions="Center" />
-                </HorizontalStackLayout>
-
-                <!-- Last Call -->
-                <HorizontalStackLayout>
-                    <CheckBox x:Name="LastCallCheckBox" />
-                    <Label Text="Last Call: Indringende vragen over je diepste en donkerste vriendschappen."
-                           FontSize="14"
-                           WidthRequest="300"
-                           LineBreakMode="WordWrap"
-                           VerticalOptions="Center" />
-                </HorizontalStackLayout>
-
-                <!-- Extra Vies -->
-                <HorizontalStackLayout>
-                    <CheckBox x:Name="ExtraViesCheckBox" />
-                    <Label Text="Extra Vies: Extreem pittige vragen zorgen ervoor dat je veel meer leert dan je zou moeten."
-                           FontSize="14"
-                           WidthRequest="300"
-                           LineBreakMode="WordWrap"
-                           VerticalOptions="Center" />
-                </HorizontalStackLayout>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <ListView x:Name="CategoriesListView" ItemsSource="{Binding Categories}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding IsChecked}" />
+                                    <Label Text="{Binding Category.Label}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </VerticalStackLayout>
+
+            <!-- Categorieen --><!--
+            <VerticalStackLayout Spacing="10">
+                --><!-- Happy Hour --><!--
+                <HorizontalStackLayout>
+                    <CheckBox x:Name="HistoryCheckBox" />
+                    <Label Text="Geschiedenis"
+                           FontSize="14"
+                           WidthRequest="300"
+                           LineBreakMode="WordWrap"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                --><!-- On the Rocks --><!--
+                <HorizontalStackLayout>
+                    <CheckBox x:Name="MusicCheckBox" />
+                    <Label Text="Muziek"
+                           FontSize="14"
+                           WidthRequest="300"
+                           LineBreakMode="WordWrap"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                --><!-- Last Call --><!--
+                <HorizontalStackLayout>
+                    <CheckBox x:Name="ScienceCheckBox" />
+                    <Label Text="Wetenschap"
+                           FontSize="14"
+                           WidthRequest="300"
+                           LineBreakMode="WordWrap"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                --><!-- Extra Vies --><!--
+                <HorizontalStackLayout>
+                    <CheckBox x:Name="FoodDrinkCheckBox" />
+                    <Label Text="Eten en Drinken"
+                           FontSize="14"
+                           WidthRequest="300"
+                           LineBreakMode="WordWrap"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>-->
 
             <!-- Volgende knop -->
             <Button Text="Volgende"

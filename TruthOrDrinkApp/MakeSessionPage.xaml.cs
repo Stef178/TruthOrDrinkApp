@@ -6,21 +6,26 @@ namespace TruthOrDrinkApp
 {
     public partial class MakeSessionPage : ContentPage
     {
-        private readonly dynamic _selectedData;
         private readonly Constants _database;
+        private readonly int _daringLevel;
+        private readonly List<Category> _categories;
+        private readonly QuestionTypes _questionTypes;
+        private Session session;
 
         public MakeSessionPage(dynamic selectedData, Constants database)
         {
             InitializeComponent();
-            _selectedData = selectedData;
+            _daringLevel = selectedData.DaringLevel;
+            _questionTypes = selectedData.QuestionTypes;
             _database = database;
+            _categories = selectedData.GetType().GetProperty("SelectedCategories") != null ? selectedData.SelectedCategories : new List<Category>();
 
 
             // Toon de geselecteerde gegevens in de labels
-            DaringLevelLabel.Text = $"Gewaagdheidsniveau: {_selectedData.DaringLevel}";
-            CategoriesLabel.Text = "Geselecteerde categorieën: " + string.Join(", ", _selectedData.SelectedCategories);
+            DaringLevelLabel.Text = $"Gewaagdheidsniveau: {_daringLevel}";
+            CategoriesLabel.Text = "Geselecteerde categorieën: " + string.Join(", ", _categories.Select(category => category.Label));
             QuestionTypeLabel.Text = "Geselecteerde vraagtypes: ";
-            switch (_selectedData.QuestionTypes)
+            switch (_questionTypes)
             {
                 case QuestionTypes.PERSONALIZED_AND_SUGGESTED:
                     QuestionTypeLabel.Text += "Gepersonaliseerd en Voorgesteld";
@@ -34,23 +39,37 @@ namespace TruthOrDrinkApp
             }
 
             // Genereer de QR-code
-            string sessioncode = Task.Run(async () => await CreateNewSession(_selectedData)).Result;
+            string sessioncode = Task.Run(async () => await CreateNewSession(_daringLevel, _categories, _questionTypes)).Result;
             GenerateQRCode(sessioncode);
         }
 
-        private async Task<string> CreateNewSession(dynamic selectedData)
+        private async Task<string> CreateNewSession(int daringLevel, List<Category> selectedCategories, QuestionTypes questionTypes)
         {
             string sessionCode = Guid.NewGuid().ToString();
 
-            var session = new Session
+              session = new Session
             {
                 SessionCode = sessionCode,
-                DaringLevel = selectedData.DaringLevel,
-                Categories = selectedData.SelectedCategories,
-                QuestionTypes = selectedData.QuestionTypes,
+                DaringLevel = daringLevel,
+                Categories = selectedCategories,
+                QuestionTypes = questionTypes,
 
             };
             await _database.AddAsync(session);
+
+            List<SessionCategory> sessionCategories = new List<SessionCategory>();
+            foreach (var category in session.Categories)
+            {
+                var sessionCategory = new SessionCategory
+                {
+                    CategoryId = category.Id,
+                    SessionId = session.SessionID
+                };
+                sessionCategories.Add(sessionCategory);
+            }
+            await _database.AddAllAsync(sessionCategories);
+
+
 
             return sessionCode;
         }
@@ -81,7 +100,7 @@ namespace TruthOrDrinkApp
         private async void OnNextButtonClicked(object sender, EventArgs e)
         {
             // Ga naar de volgende pagina
-            await Navigation.PushAsync(new FillQuestionPool());
+            await Navigation.PushAsync(new GameStartedxaml(session, _database, _questionTypes, _categories));
         }
     }
 }

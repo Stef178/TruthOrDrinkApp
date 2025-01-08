@@ -32,8 +32,6 @@ namespace TruthOrDrinkApp
             Star1.Text = level >= 1 ? "★" : "★";
             Star2.Text = level >= 2 ? "★" : "★";
             Star3.Text = level >= 3 ? "★" : "★";
-            Star4.Text = level >= 4 ? "★" : "★";
-            Star5.Text = level >= 5 ? "★" : "★";
         }
 
         // Volgende knop
@@ -49,7 +47,7 @@ namespace TruthOrDrinkApp
             Console.WriteLine($"Gewaagdheidsniveau gekozen: {_daringLevel}");
 
             // Navigeer naar de ChooseQuestionCategoryPage en geef het gewaagdheidsniveau door
-            await Navigation.PushAsync(new ChooseQuestionCategoryPage(_daringLevel, _database));
+            await Navigation.PushAsync(new SelectQuestionType(_daringLevel, _database));
         }
 
     }

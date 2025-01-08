@@ -6,14 +6,12 @@ namespace TruthOrDrinkApp
     public partial class SelectQuestionType : ContentPage
     {
         private readonly int _daringLevel;
-        private readonly List<string> _selectedCategories;
         private readonly Constants _database;
 
-        public SelectQuestionType(int daringLevel, List<string> selectedCategories, Constants database)
+        public SelectQuestionType(int daringLevel, Constants database)
         {
             InitializeComponent();
             _daringLevel = daringLevel;
-            _selectedCategories = selectedCategories;
             _database = database;
         }
 
@@ -40,12 +38,17 @@ namespace TruthOrDrinkApp
             var selectedData = new
             {
                 DaringLevel = _daringLevel,
-                SelectedCategories = _selectedCategories,
                 QuestionTypes = questionTypes
             };
 
-            // Navigeren naar MakeSessionPage en data doorgeven
-            await Navigation.PushAsync(new MakeSessionPage(selectedData, _database));
+            if (questionTypes == QuestionTypes.PERSONALIZED)
+            {
+
+                await Navigation.PushAsync(new MakeSessionPage(selectedData, _database));
+            }
+            else {
+                await Navigation.PushAsync(new ChooseQuestionCategoryPage(_daringLevel, questionTypes, _database));
+            }
         }
     }
 }
