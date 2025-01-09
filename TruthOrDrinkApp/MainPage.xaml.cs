@@ -35,8 +35,11 @@ namespace TruthOrDrinkApp
 
         private async void OnCreateQuestionsButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CreateQuestionsPage());
+
+            // Navigeer naar de CreateQuestionsPage en geef de database door
+            await Navigation.PushAsync(new CreateQuestionsPage(_database));
         }
+
 
         private async void OpenDatabaseBrowser(object sender, EventArgs e)
         {

@@ -3,8 +3,9 @@
              x:Class="TruthOrDrinkApp.CreateQuestionsPage"
              Title="Vragen aanmaken">
     <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
-        <Label Text="Hier kun je vragen aanmaken!"
-               FontSize="18"
-               HorizontalOptions="Center" />
+        <Entry x:Name="QuestionEntry"
+               Placeholder="Typ hier je vraag" />
+        <Button Text="Voeg vraag toe"
+                Clicked="OnAddQuestionClicked" />
     </VerticalStackLayout>
 </ContentPage>
