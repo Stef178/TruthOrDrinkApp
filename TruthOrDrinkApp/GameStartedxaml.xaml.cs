@@ -18,14 +18,16 @@ namespace TruthOrDrinkApp
         private List<Question> _questions = new List<Question>();
         private int currentQuestionIndex = 0;
         private readonly Session _session;
+        private readonly int _daringLevel;
         private readonly List<Category> _categories;
 
-        public GameStartedxaml(Session session, Constants database, QuestionTypes questionTypes, List<Category> categories)
+        public GameStartedxaml(Session session, Constants database, QuestionTypes questionTypes, List<Category> categories, int daringlevel)
         {
             InitializeComponent();
             _session = session;
             _database = database;
             _categories = categories;
+            _daringLevel = daringlevel;
 
             if (questionTypes == QuestionTypes.SUGGESTED)
             {
@@ -59,8 +61,11 @@ namespace TruthOrDrinkApp
         {
             try
             {
-                // API-aanroep om vragen op te halen
-                var response = await client.GetStringAsync($"https://the-trivia-api.com/api/questions?categories={string.Join(",",_categories.Select(category => category.Name))}&limit=5&region=NL&difficulty=medium");
+                // Converteer daring level naar moeilijkheidsniveau
+                string difficulty = ConvertDaringLevelToDifficulty(_daringLevel);
+
+                // API-aanroep om vragen op te halen, inclusief difficulty
+                var response = await client.GetStringAsync($"https://the-trivia-api.com/api/questions?categories={string.Join(",", _categories.Select(category => category.Name))}&limit=25&region=NL&difficulty={difficulty}");
 
                 // Controleer de respons om te zorgen dat deze correct is
                 Console.WriteLine(response);
@@ -83,6 +88,19 @@ namespace TruthOrDrinkApp
                 return new List<SuggestedQuestion>();
             }
         }
+
+        // Helperfunctie om daring level te converteren
+        private string ConvertDaringLevelToDifficulty(int daringLevel)
+        {
+            return daringLevel switch
+            {
+                1 => "easy",
+                2 => "medium",
+                3 => "hard",
+                _ => "medium" // Standaard naar medium als de waarde onbekend is
+            };
+        }
+
 
         private void DisplayCurrentQuestion()
         {

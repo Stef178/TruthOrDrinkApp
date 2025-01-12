@@ -101,8 +101,8 @@ namespace TruthOrDrinkApp
         private async void OnNextButtonClicked(object sender, EventArgs e)
         {
             // Ga naar de volgende pagina
-            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(500));
-            await Navigation.PushAsync(new GameStartedxaml(session, _database, _questionTypes, _categories));
+            //Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(500));
+            await Navigation.PushAsync(new GameStartedxaml(session, _database, _questionTypes, _categories, _daringLevel));
         }
     }
 }
