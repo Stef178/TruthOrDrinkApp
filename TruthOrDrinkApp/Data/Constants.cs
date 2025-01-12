@@ -40,8 +40,7 @@ namespace TruthOrDrinkApp.Data
 
         private void AddCategories() 
         { 
-            //_database.DropTableAsync<Category>().Wait();
-            //_database.CreateTableAsync<Category>().Wait();
+
             List<Category> categories = new List<Category>() 
             { new Category( "history", "Geschiedenis"),
               new Category( "music", "Muziek"),

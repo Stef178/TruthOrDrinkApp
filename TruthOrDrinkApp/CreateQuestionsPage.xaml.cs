@@ -20,7 +20,7 @@ namespace TruthOrDrinkApp
             {
                 var newQuestion = new Question(questionText);
                 await _database.AddAsync(newQuestion);
-                QuestionEntry.Text = string.Empty; // Clear het invoerveld
+                QuestionEntry.Text = string.Empty;
             }
         }
     }

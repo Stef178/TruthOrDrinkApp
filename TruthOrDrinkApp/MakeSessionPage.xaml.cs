@@ -22,7 +22,7 @@ namespace TruthOrDrinkApp
             _categories = selectedData.GetType().GetProperty("SelectedCategories") != null ? selectedData.SelectedCategories : new List<Category>();
 
 
-            // Toon de geselecteerde gegevens in de labels
+            // Toon de geselecteerde gegevens
             DaringLevelLabel.Text = $"Gewaagdheidsniveau: {_daringLevel}";
             CategoriesLabel.Text = "Geselecteerde categorieën: " + string.Join(", ", _categories.Select(category => category.Label));
             QuestionTypeLabel.Text = "Geselecteerde vraagtypes: ";
@@ -39,7 +39,7 @@ namespace TruthOrDrinkApp
                     break;
             }
 
-            // Genereer de QR-code
+            
             string sessioncode = Task.Run(async () => await CreateNewSession(_daringLevel, _categories, _questionTypes)).Result;
             GenerateQRCode(sessioncode);
         }
@@ -100,8 +100,8 @@ namespace TruthOrDrinkApp
 
         private async void OnNextButtonClicked(object sender, EventArgs e)
         {
-            // Ga naar de volgende pagina
-            //Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(500));
+            
+            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(500));
             await Navigation.PushAsync(new GameStartedxaml(session, _database, _questionTypes, _categories, _daringLevel));
         }
     }

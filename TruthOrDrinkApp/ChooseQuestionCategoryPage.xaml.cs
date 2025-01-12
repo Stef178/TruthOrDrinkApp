@@ -24,7 +24,7 @@ namespace TruthOrDrinkApp
             );
             BindingContext = this;
 
-            // Debugging: Laat zien welk gewaagdheidsniveau is ontvangen
+
             Console.WriteLine($"Ontvangen gewaagdheidsniveau: {_daringLevel}");
         }
 
@@ -35,14 +35,13 @@ namespace TruthOrDrinkApp
             .Select(vm => vm.Category)
             .ToList();
 
-            // Controleer of minstens één categorie is geselecteerd
             if (selectedCategories.Count == 0)
             {
                 await DisplayAlert("Fout", "Selecteer minstens één categorie.", "OK");
                 return;
             }
 
-            // Debugging: Toon geselecteerde categorieën
+
             Console.WriteLine("Geselecteerde categorieën: " + string.Join(", ", selectedCategories));
 
             var selectedData = new

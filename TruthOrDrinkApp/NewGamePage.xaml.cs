@@ -4,7 +4,7 @@ namespace TruthOrDrinkApp
 {
     public partial class NewGamePage : ContentPage
     {
-        private int _daringLevel = 0; // Gekozen gewaagdheidsniveau
+        private int _daringLevel = 0;
         private readonly Constants _database;
 
         public NewGamePage(Constants database)
@@ -13,7 +13,7 @@ namespace TruthOrDrinkApp
             _database = database;
         }
 
-        // Sterren klikken
+        
         private void OnStarClicked(object sender, EventArgs e)
         {
             if (sender is Button button && int.TryParse(button.CommandParameter.ToString(), out int selectedLevel))
@@ -21,7 +21,7 @@ namespace TruthOrDrinkApp
                 _daringLevel = selectedLevel;
                 SelectedLevelLabel.Text = $"Gewaagdheidsniveau: {_daringLevel}";
 
-                // Optioneel: Markeer geselecteerde sterren
+                
                 UpdateStarSelection(_daringLevel);
             }
         }
@@ -34,7 +34,7 @@ namespace TruthOrDrinkApp
             Star3.Text = level >= 3 ? "★" : "★";
         }
 
-        // Volgende knop
+        
         private async void OnNextButtonClicked(object sender, EventArgs e)
         {
             if (_daringLevel == 0)
@@ -46,7 +46,7 @@ namespace TruthOrDrinkApp
             // Debugging: Toon geselecteerde waarde
             Console.WriteLine($"Gewaagdheidsniveau gekozen: {_daringLevel}");
 
-            // Navigeer naar de ChooseQuestionCategoryPage en geef het gewaagdheidsniveau door
+        
             await Navigation.PushAsync(new SelectQuestionType(_daringLevel, _database));
         }
 

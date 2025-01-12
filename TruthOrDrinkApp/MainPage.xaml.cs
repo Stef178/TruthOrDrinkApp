@@ -9,13 +9,13 @@ namespace TruthOrDrinkApp
         private readonly Constants _database;
         private readonly User _currentUser;
 
-        public MainPage(Constants database, User currentUser) // Constructor aangepast
+        public MainPage(Constants database, User currentUser)
         {
             InitializeComponent();
             _database = database;
             _currentUser = currentUser;
 
-            // Stel de welkomsttekst in
+            
             WelcomeLabel.Text = $"Welkom, {_currentUser.Name}!";
         }
 
@@ -50,12 +50,12 @@ namespace TruthOrDrinkApp
         {
             try
             {
-                // Open de camera en wacht tot de gebruiker een foto maakt
+                // Open de camera
                 var photo = await MediaPicker.CapturePhotoAsync();
 
                 if (photo != null)
                 {
-                    // Opslaan of verder verwerken als nodig
+                    
                     await DisplayAlert("Foto gemaakt", "De foto is opgeslagen: " + photo.FullPath, "OK");
                 }
             }

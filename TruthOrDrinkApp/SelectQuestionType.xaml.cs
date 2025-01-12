@@ -17,7 +17,7 @@ namespace TruthOrDrinkApp
 
         private async void OnNextButtonClicked(object sender, EventArgs e)
         {
-            // Haal de geselecteerde vraagtypes op
+            
             var personalizedSelected = PersonalizedCheckBox.IsChecked;
             var suggestedSelected = SuggestedCheckBox.IsChecked;
 
@@ -34,7 +34,7 @@ namespace TruthOrDrinkApp
                 questionTypes = QuestionTypes.SUGGESTED;
 
             }
-            // Maak een object van de geselecteerde data
+           
             var selectedData = new
             {
                 DaringLevel = _daringLevel,

@@ -61,19 +61,19 @@ namespace TruthOrDrinkApp
         {
             try
             {
-                // Converteer daring level naar moeilijkheidsniveau
+                
                 string difficulty = ConvertDaringLevelToDifficulty(_daringLevel);
 
-                // API-aanroep om vragen op te halen, inclusief difficulty
+                // API-aanroep
                 var response = await client.GetStringAsync($"https://the-trivia-api.com/api/questions?categories={string.Join(",", _categories.Select(category => category.Name))}&limit=25&region=NL&difficulty={difficulty}");
 
-                // Controleer de respons om te zorgen dat deze correct is
+                
                 Console.WriteLine(response);
 
-                // JSON-parsing naar de SuggestedQuestion lijst
+                
                 var options = new JsonSerializerOptions
                 {
-                    PropertyNameCaseInsensitive = true // Negeer hoofdlettergevoeligheid
+                    PropertyNameCaseInsensitive = true 
                 };
 
                 List<SuggestedQuestion> suggestedQuestions = JsonSerializer.Deserialize<List<SuggestedQuestion>>(response, options);
@@ -83,13 +83,13 @@ namespace TruthOrDrinkApp
             }
             catch (Exception ex)
             {
-                // Foutafhandeling
+               
                 Console.WriteLine($"Er is een fout opgetreden: {ex.Message}");
                 return new List<SuggestedQuestion>();
             }
         }
 
-        // Helperfunctie om daring level te converteren
+        
         private string ConvertDaringLevelToDifficulty(int daringLevel)
         {
             return daringLevel switch
@@ -97,7 +97,7 @@ namespace TruthOrDrinkApp
                 1 => "easy",
                 2 => "medium",
                 3 => "hard",
-                _ => "medium" // Standaard naar medium als de waarde onbekend is
+                _ => "medium" 
             };
         }
 
